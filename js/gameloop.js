@@ -50,6 +50,17 @@ export class Game {
       this.ballArray.push(this.ball2);
     }
 
+    if (this.level === 3) {
+      this.ball = new Ball(this, 50, 200, 40, 1.3);
+      this.ball2 = new Ball(this, 1300, 200, 40, 1.3);
+      this.ball3 = new Ball(this, 50, 400, 40, 1.5);
+      this.ball4 = new Ball(this, 1300, 400, 40, 1.5);
+      this.ballArray.push(this.ball);
+      this.ballArray.push(this.ball2);
+      this.ballArray.push(this.ball3);
+      this.ballArray.push(this.ball4);
+    }
+
     this.timeline = new Timeline(this);
 
     this.shooter = new Shooter(this, this.ballArray);
@@ -123,6 +134,16 @@ export class Game {
       this.ball2 = new Ball(this, 1300, 200, 40, 1.3);
       this.ballArray.push(this.ball);
       this.ballArray.push(this.ball2);
+    }
+
+    if (this.level === 3) {
+      this.ball = new Ball(this, 50, 200, 40, 1.3);
+      this.ball2 = new Ball(this, 1300, 200, 40, 1.3);
+      this.ball3 = new Ball(this, 860, 400, 40, 1.5);
+
+      this.ballArray.push(this.ball);
+      this.ballArray.push(this.ball2);
+      this.ballArray.push(this.ball3);
     }
   }
 
@@ -204,10 +225,11 @@ export class Game {
     }
 
     if (this.levelComplete) {
-      if (this.level !== 2) {
+      if (this.level !== 3) {
         this.levelCompleteText(ctx);
         window.cancelAnimationFrame(id);
         this.level++;
+        console.log(this.level);
         setTimeout(() => {
           this.levelComplete = false;
           this.nextLevel(ctx);

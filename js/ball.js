@@ -1,12 +1,5 @@
 export class Ball {
-  constructor(
-    game,
-    ballPositionX,
-    ballPositionY,
-    ballRadius,
-    directionX,
-    gift
-  ) {
+  constructor(game, ballPositionX, ballPositionY, ballRadius, directionX) {
     this.ballPositionX = ballPositionX;
     this.ballPositionY = ballPositionY < 600 ? ballPositionY : 600;
     this.ballRadius = ballRadius;
@@ -18,7 +11,6 @@ export class Ball {
     this.game = game;
     this.gravity = 0.1;
     this.bounce = 0.95;
-    this.gift = gift;
   }
 
   draw(ctx) {
