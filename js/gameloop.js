@@ -15,7 +15,7 @@ export class Game {
     this.levelComplete = false;
     this.time = 60;
     this.fireArrow = false;
-
+    this.sound = false;
     this.generateGift = false;
     this.startGame = false;
     this.keyMap = [];
@@ -80,7 +80,7 @@ export class Game {
             } else if (i === 37) {
               this.shooter.moveLeft();
             } else if (i === 32) {
-              if (!this.fireArrow) {
+              if (!this.fireArrow && this.startGame) {
                 const audio = new Audio("./src/gun.mp3");
                 audio.play();
                 this.arrow = new Arrow(
@@ -188,10 +188,10 @@ export class Game {
     if (this.shooter.lives === 0) {
       this.startGame = false;
 
-      cancelAnimationFrame(id);
       this.gameOverText(ctx);
 
       setTimeout(() => {
+        cancelAnimationFrame(id);
         this.hit = false;
         this.level = 1;
         this.start();
@@ -213,12 +213,12 @@ export class Game {
           this.nextLevel(ctx);
         }, 3000);
       } else {
-        cancelAnimationFrame(id);
         this.gameCompleteText(ctx);
         this.startGame = false;
         this.levelComplete = false;
         this.level = 1;
         setTimeout(() => {
+          cancelAnimationFrame(id);
           this.hit = false;
           this.start();
           newScreen();

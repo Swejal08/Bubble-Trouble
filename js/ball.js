@@ -48,8 +48,14 @@ export class Ball {
         this.bounce = 1.009;
       }
     }
-    if (this.ballPositionY + this.ballRadius >= this.game.gameHeight) {
+    if (
+      this.ballPositionY + this.dY / 2 >=
+      this.game.gameHeight - this.ballRadius
+    ) {
       this.dY *= -this.bounce;
+    }
+    if (this.ballPositionY - this.ballRadius <= 0) {
+      this.dY *= -1;
     }
 
     if (
@@ -69,8 +75,11 @@ export class Ball {
         shooter.shooterPositionX + shooter.shooterWidth &&
       !this.game.invisble
     ) {
-      const audio = new Audio("./src/shot.mp3");
-      audio.play();
+      if (!this.game.sound) {
+        const audio = new Audio("./src/shot.mp3");
+        audio.play();
+      }
+
       shooter.lives -= 1;
       this.game.hit = true;
       cancelAnimationFrame(id);
@@ -95,8 +104,6 @@ export class Ball {
     ) {
       window.cancelAnimationFrame(arrow.id);
       this.game.fireArrow = false;
-
-      // this.gift.removeGift = true;
 
       if (this.ballRadius >= 20) {
         this.splitBall(this, ballArray, index);

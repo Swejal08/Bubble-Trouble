@@ -11,7 +11,6 @@ canvas.width = gameWidth;
 
 const game = new Game(gameWidth, gameHeight, gameLoop, ctx);
 
-let sound = false;
 var audio = new Audio("./src/hiphop.mp3");
 audio.loop = true;
 
@@ -20,11 +19,6 @@ game.start(ctx);
 function newScreen() {
   ctx.fillStyle = "black";
   ctx.fillRect(0, 0, gameWidth, gameHeight);
-  // let img = new Image();
-  // img.src = "./src/unnamed.png";
-  // img.onload = function () {
-  //   ctx.drawImage(img, 0, 0, 1400, 800);
-  // };
 
   ctx.beginPath();
   ctx.font = "60px Arial";
@@ -57,11 +51,11 @@ window.addEventListener("keydown", (e) => {
   }
 
   if (e.key === "Shift") {
-    if (sound) {
-      sound = false;
+    if (game.sound) {
+      game.sound = false;
       audio.play();
     } else {
-      sound = true;
+      game.sound = true;
       audio.pause();
     }
   }
