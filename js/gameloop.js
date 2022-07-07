@@ -227,20 +227,21 @@ export class Game {
     if (this.levelComplete) {
       if (this.level !== 3) {
         this.levelCompleteText(ctx);
-        window.cancelAnimationFrame(id);
         this.level++;
-        console.log(this.level);
+        this.fireArrow = false;
+        cancelAnimationFrame(id);
         setTimeout(() => {
           this.levelComplete = false;
           this.nextLevel(ctx);
         }, 3000);
       } else {
+        console.log(this.level);
         this.gameCompleteText(ctx);
         this.startGame = false;
         this.levelComplete = false;
         this.level = 1;
+        cancelAnimationFrame(id);
         setTimeout(() => {
-          cancelAnimationFrame(id);
           this.hit = false;
           this.start();
           newScreen();
